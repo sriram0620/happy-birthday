@@ -1,54 +1,60 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 import Image from "next/image";
-// import { motion, AnimatePresence } from 'framer-motion'
-import { motion, AnimatePresence } from 'framer-motion'
-import confetti from 'canvas-confetti'
-import { Cake, Gift } from 'lucide-react'
-import image from './image.png'
+import { motion, AnimatePresence } from "framer-motion";
+import confetti from "canvas-confetti";
+import { Cake, Gift } from "lucide-react";
+import image from "./image.png";
 
-export default function page() {
-    const [showConfetti, setShowConfetti] = useState(false)
-    const [showGift, setShowGift] = useState(false)
-    const [balloons, setBalloons] = useState([])
+// Define types for balloons
+interface Balloon {
+    id: number;
+    x: number;
+    y: number;
+}
+
+export default function Page() {
+    const [showConfetti, setShowConfetti] = useState<boolean>(false);
+    const [showGift, setShowGift] = useState<boolean>(false);
+    const [balloons, setBalloons] = useState<Balloon[]>([]);
 
     useEffect(() => {
         if (showConfetti) {
             confetti({
                 particleCount: 100,
                 spread: 70,
-                origin: { y: 0.6 }
-            })
+                origin: { y: 0.6 },
+            });
         }
-    }, [showConfetti])
+    }, [showConfetti]);
 
     const handleCakeClick = () => {
-        setShowConfetti(true)
-        setTimeout(() => setShowConfetti(false), 5000)
-    }
+        setShowConfetti(true);
+        setTimeout(() => setShowConfetti(false), 5000);
+    };
 
     const handleGiftClick = () => {
-        setShowGift(true)
-        setTimeout(() => setShowGift(false), 3000)
-    }
+        setShowGift(true);
+        setTimeout(() => setShowGift(false), 3000);
+    };
 
     const addBalloon = () => {
-        const newBalloon = {
+        const newBalloon: Balloon = {
             id: Date.now(),
             x: Math.random() * 100,
             y: 110 + Math.random() * 10,
-        }
-        setBalloons(prev => [...prev, newBalloon])
+        };
+        setBalloons((prev) => [...prev, newBalloon]);
         setTimeout(() => {
-            setBalloons(prev => prev.filter(b => b.id !== newBalloon.id))
-        }, 5000)
-    }
+            setBalloons((prev) => prev.filter((b) => b.id !== newBalloon.id));
+        }, 5000);
+    };
 
     useEffect(() => {
-        const interval = setInterval(addBalloon, 2000)
-        return () => clearInterval(interval)
-    }, [])
+        const interval = setInterval(addBalloon, 2000);
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <div className="min-h-screen bg-white flex items-center justify-center p-4 overflow-hidden">
@@ -69,14 +75,13 @@ export default function page() {
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: i * 0.01, duration: 0.5 }}
                                 style={{
-                                    top: Math.random() * 100 + '%',
-                                    left: Math.random() * 100 + '%',
-                                    fontSize: '8px',
+                                    top: Math.random() * 100 + "%",
+                                    left: Math.random() * 100 + "%",
+                                    fontSize: "8px",
                                 }}
                             >
                                 ♥
                             </motion.div>
-
                         ))}
                     </div>
 
@@ -85,21 +90,22 @@ export default function page() {
                         <div className="flex mb-4">
                             <div className="w-1/2 pr-4">
                                 <motion.div
-                                    className="bg-white p-2 rounded-lg shadow-md transform rotate-[-4deg] w-25 h-50" // set width and height here
+                                    className="bg-white p-2 rounded-lg shadow-md transform rotate-[-4deg] w-25 h-50"
                                     initial={{ rotate: -8, scale: 0.9 }}
                                     animate={{ rotate: -4, scale: 1 }}
                                     transition={{ duration: 0.5 }}
                                     whileHover={{ scale: 1.05, rotate: 0 }}
                                 >
-                                    <div className="relative w-full h-full"> {/* Set full height/width for containing the image */}
+                                    <div className="relative w-full h-full">
                                         <Image
                                             src={image}
                                             alt="Birthday girl"
-                                            className="rounded object-cover" // object-cover ensures the image covers the entire container and stays square
-                                            width={500} 
+                                            className="rounded object-cover"
+                                            width={500}
                                             height={300}
-                                            layout="responsive" 
+                                            layout="responsive"
                                         />
+
                                     </div>
                                 </motion.div>
                             </div>
@@ -154,22 +160,20 @@ export default function page() {
                         </motion.p>
                     </div>
 
-
                     {/* Bunting */}
                     <div className="absolute top-0 left-0 w-full overflow-hidden">
                         <svg width="100%" height="48" viewBox="0 0 100 48" preserveAspectRatio="none">
                             {[...Array(7)].map((_, i) => (
                                 <motion.path
                                     key={i}
-                                    d={`M${i * 16.67} 0 L${(i + 0.5) * 16.67} 48 L${(i + 1) * 16.67} 0`} // Corrected template literal
-                                    fill={i % 2 === 0 ? '#FED7D7' : '#FFF5F5'}
+                                    d={`M${i * 16.67} 0 L${(i + 0.5) * 16.67} 48 L${(i + 1) * 16.67} 0`}
+                                    fill={i % 2 === 0 ? "#FED7D7" : "#FFF5F5"}
                                     initial={{ y: -48 }}
                                     animate={{ y: 0 }}
                                     transition={{ delay: i * 0.1, duration: 0.5 }}
                                 />
                             ))}
                         </svg>
-
                     </div>
 
                     {/* Gift animation */}
@@ -188,22 +192,20 @@ export default function page() {
                     </AnimatePresence>
 
                     {/* Floating balloons */}
-                    {balloons.map(balloon => (
+                    {balloons.map((balloon) => (
                         <motion.div
                             key={balloon.id}
                             className="absolute text-4xl"
-                            initial={{ bottom: '-10%', left: balloon.x + '%' }} // Corrected initial style
-                            animate={{ bottom: '110%' }}
-                            transition={{ duration: 5, ease: 'easeOut' }}
-                            style={{ left: balloon.x + '%' }} // Corrected inline style
+                            initial={{ bottom: "-10%", left: balloon.x + "%" }}
+                            animate={{ bottom: "110%" }}
+                            transition={{ duration: 5, ease: "easeOut" }}
+                            style={{ left: balloon.x + "%" }}
                         >
                             🎈
                         </motion.div>
                     ))}
-
                 </div>
-
             </motion.div>
         </div>
-    )
+    );
 }

@@ -1,6 +1,5 @@
 "use client"; // Add this line to mark the component as a Client Component
 
-import Image from "next/image";
 import { useRouter } from 'next/navigation';
 import { useEffect } from "react";
 
