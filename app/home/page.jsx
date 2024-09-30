@@ -109,7 +109,7 @@ export default function page() {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.2, duration: 0.5 }}
                                 >
-                                    <h2 className="text-2xl font-bold text-gray-800 mb-2">HEY GIRL!</h2>
+                                    <h2 className="text-2xl font-bold text-gray-800 mb-2">OYY..</h2>
                                     <h1 className="text-4xl font-bold text-pink-500 mb-2">HAPPY BIRTHDAY</h1>
                                     <h1 className="text-5xl font-bold text-pink-600">Aashritha</h1>
                                 </motion.div>
@@ -142,7 +142,7 @@ export default function page() {
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.6, duration: 0.5 }}
                         >
-                            IN ALL THE ALTERNATE UNIVERSES, I'D STILL PICK YOU TO BE MY BEST PAL.
+                            Potti ga unna Gatti ga undu 🙌
                         </motion.p>
                         <motion.p
                             className="text-center text-pink-600 font-semibold"
@@ -150,7 +150,7 @@ export default function page() {
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.8, duration: 0.5 }}
                         >
-                            I'M ALWAYS HERE FOR YOU
+                            Happy Birthday Doctor Gaaru..🦋
                         </motion.p>
                     </div>
 
