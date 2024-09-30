@@ -70,7 +70,7 @@ export default function Page() {
                         {[...Array(100)].map((_, i) => (
                             <motion.div
                                 key={i}
-                                className="absolute text-pink-200"
+                                className="absolute text-pink-100"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: i * 0.01, duration: 0.5 }}
